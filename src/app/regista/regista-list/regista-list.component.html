@@ -1,0 +1,61 @@
+<main class="flex-shrink-0" style="padding-top: 50px;">
+    <div class="container">
+
+        <div class="alert alert-success alert-dismissible fade show " role="alert" *ngIf="confirmMessage">
+            {{confirmMessage}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <div class='card'>
+            <div class='card-header'>
+                <h5>Lista dei risultati</h5>
+            </div>
+            <div class='card-body'>
+                <a class="btn btn-primary " routerLink="/regista/create">Add New</a>
+
+                <div class='table-responsive'>
+                    <table class='table table-striped '>
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nome</th>
+                                <th>Cognome</th>
+                                <th>Nickname</th>
+                                <th>Data Nascita</th>
+                                <th>Sesso</th>
+                                <th>Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let regista of listaRegisti" style="height: 48.5px;">
+                                <td>{{regista.id}}</td>
+                                <td>{{regista.nome}}</td>
+                                <td>{{regista.cognome}}</td>
+                                <td>{{regista.nickName}}</td>
+                                <td>{{regista.dataDiNascita | date:'dd/MM/yyyy'}}</td>
+                                <td>{{regista.sesso}}</td>
+                                <td>
+                                    <a class="btn btn-outline-secondary"
+                                        routerLink="/regista/show/{{regista.id}}">Visualizza</a>
+                                    <a routerLink="/regista/update/{{regista.id}}" class='btn btn-outline-primary'>
+                                        Aggiorna
+                                    </a>
+                                    <a routerLink="/regista/delete/{{regista.id}}" class='btn btn-outline-danger'>
+                                        Elimina
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- end card-body -->
+            </div>
+            <!-- end card -->
+        </div>
+
+
+        <!-- end container -->
+    </div>
+
+</main>

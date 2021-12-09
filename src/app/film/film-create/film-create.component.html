@@ -1,0 +1,116 @@
+<main class="flex-shrink-0">
+    <div class="container">
+
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errorMessage">
+            {{errorMessage}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <div class='card'>
+            <div class='card-header'>
+                <h5>Inserimento Film</h5>
+            </div>
+
+
+
+            <form (ngSubmit)="create(filmForm)" #filmForm="ngForm">
+                <div class='card-body'>
+                    <input type="hidden" name="id" id="id" value="{{film.id}}">
+
+                    <div class="col-md-6">
+                        <label>Titolo <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" placeholder="Inserire il titolo" required minlength="2"
+                            id="titolo" name="titolo" [(ngModel)]="film.titolo" #titoloVar="ngModel"
+                            [ngClass]="{'is-invalid': (titoloVar.touched || titoloVar.dirty) && !titoloVar.valid }">
+                        <span class="invalid-feedback">
+                            <span *ngIf="titoloVar.errors?.['required']">
+                                Prego inserire un valore
+                            </span>
+                            <span *ngIf="titoloVar.errors?.['minlength']">
+                                Il campo deve avere almeno due caratteri.
+                            </span>
+                        </span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Genere <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" placeholder="Inserire il genere" required minlength="2"
+                            id="genere" name="genere" [(ngModel)]="film.genere" #genereVar="ngModel"
+                            [ngClass]="{'is-invalid': (genereVar.touched || genereVar.dirty) && !genereVar.valid }">
+                        <span class="invalid-feedback">
+                            <span *ngIf="genereVar.errors?.['required']">
+                                Prego inserire un valore
+                            </span>
+                            <span *ngIf="genereVar.errors?.['min']">
+                                Il campo deve contenere al minimo il valore 10.
+                            </span>
+                        </span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Minuti durata <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" placeholder="Inserire minuti durata" required min="30"
+                            id="minutiDurata" name="minutiDurata" [(ngModel)]="film.minutiDurata"
+                            #minutiDurataVar="ngModel"
+                            [ngClass]="{'is-invalid': (minutiDurataVar.touched || minutiDurataVar.dirty) && !minutiDurataVar.valid }">
+                        <span class="invalid-feedback">
+                            <span *ngIf="minutiDurataVar.errors?.['required']">
+                                Prego inserire un valore
+                            </span>
+                            <span *ngIf="minutiDurataVar.errors?.['minlength']">
+                                Il campo deve avere almeno 5 caratteri.
+                            </span>
+                        </span>
+                    </div>
+
+                    <div class=" col-md-6">
+                        <label>Data Pubblicazione<span class="text-danger">*</span></label>
+                        <input type="date" class="form-control" placeholder="dd/MM/yy" required id="dataPubblicazione"
+                            name="dataPubblicazione" title="formato : gg/mm/aaaa" [(ngModel)]="film.dataPubblicazione"
+                            #dataPubblicazioneVar="ngModel"
+                            [ngClass]="{'is-invalid': (dataPubblicazioneVar.touched || dataPubblicazioneVar.dirty) && !dataPubblicazioneVar.valid }">
+                        <span class="invalid-feedback">
+                            <span *ngIf="!dataPubblicazioneVar.valid">
+                                Il campo deve essere correttamente valorizzato
+                            </span>
+                        </span>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label>Regista <span class="text-danger">*</span></label>
+                        <select id="regista" class="form-control" required name="regista" [(ngModel)]="film.regista.id"
+                            #registaVar="ngModel"
+                            [ngClass]="{'is-invalid': (registaVar.touched || registaVar.dirty) && !registaVar.valid }">
+                            <option value=""> - Selezionare - </option>
+                            <option *ngFor="let registaItem of listaRegisti" value="{{registaItem.id}}">
+                                {{registaItem.nome}}&nbsp;{{registaItem.cognome}}</option>
+                        </select>
+                        <span class="invalid-feedback">
+                            <span *ngIf="registaVar.errors?.['required']">
+                                Prego selezionare un valore
+                            </span>
+                        </span>
+                    </div>
+
+                </div>
+                <div class='card-footer'>
+                    <button type="submit" name="submit" value="submit" id="submit"
+                        class="btn btn-primary">Inserisci</button>
+                    <a routerLink="/film/list" class='btn btn-outline-secondary' style='width:80px'>
+                        <i class='fa fa-chevron-left'></i> Back
+                    </a>
+                </div>
+            </form>
+
+
+            <!-- end card body -->
+
+
+            <!-- end card -->
+        </div>
+
+
+        <!-- end container -->
+    </div>
+
+</main>

@@ -1,0 +1,61 @@
+<main class="flex-shrink-0" style="padding-top: 50px;">
+    <div class="container">
+
+        <div class="alert alert-success alert-dismissible fade show " role="alert" *ngIf="confirmMessage">
+            {{confirmMessage}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <div class='card'>
+            <div class='card-header'>
+                <h5>Lista dei risultati</h5>
+            </div>
+            <div class='card-body'>
+                <a class="btn btn-primary " routerLink="/film/create">Add New</a>
+
+                <div class='table-responsive'>
+                    <table class='table table-striped '>
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Titolo</th>
+                                <th>Genere</th>
+                                <th>Minuti durata</th>
+                                <th>Data Pubblicazione</th>
+                                <th>Regista</th>
+                                <th>Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let film of listaFilms" style="height: 48.5px;">
+                                <td>{{film.id}}</td>
+                                <td>{{film.titolo}}</td>
+                                <td>{{film.genere}}</td>
+                                <td>{{film.minutiDurata}}</td>
+                                <td>{{film.dataPubblicazione | date:'dd/MM/yyyy'}}</td>
+                                <td>{{film.regista.nome}}&nbsp;{{film.regista.cognome}}</td>
+                                <td>
+                                    <a class="btn btn-outline-secondary"
+                                        routerLink="/film/show/{{film.id}}">Visualizza</a>
+                                    <a routerLink="/film/update/{{film.id}}" class='btn btn-outline-primary'>
+                                        Aggiorna
+                                    </a>
+                                    <a routerLink="/film/delete/{{film.id}}" class='btn btn-outline-danger'>
+                                        Elimina
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- end card-body -->
+            </div>
+            <!-- end card -->
+        </div>
+
+
+        <!-- end container -->
+    </div>
+
+</main>
